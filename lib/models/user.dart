@@ -17,20 +17,20 @@ class User {
         this.phone = phone!,
         this.email = email! {
     print('User created');
-    _type = email != null ? LoginType.email : LoginType.phone;
+    _type = email.isNotEmpty ? LoginType.email : LoginType.phone;
   }
 
   factory User({String? name, String? phone, String? email}) {
-    if (name!.isEmpty) throw Exception('User name is empty');
-    if (phone!.isEmpty || email!.isEmpty) {
-      throw Exception('User phone is empty');
+    if (name == null) throw Exception('User name is empty');
+    if (phone == null && email == null) {
+      throw Exception('User phone and email are empty');
     }
 
     return User._(
         firstName: _getFirstName(name),
         lastName: _getLastName(name),
-        phone: checkPhone(phone),
-        email: checkEmail(email));
+        phone: phone == null ? '' : checkPhone(phone),
+        email: email == null ? '' : checkEmail(email));
   }
 
   static String _getLastName(String? userName) => userName!.split(' ')[1];
