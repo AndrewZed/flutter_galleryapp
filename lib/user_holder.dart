@@ -65,13 +65,34 @@ class UserHolder {
     user.addFriends(friends);
   }
 
-  User? findUserInFriends(String fullName, User friend) {
+  User findUserInFriends(String fullName, User friend) {
     User user = getUserByLogin(fullName);
 
     List<User> friends = user.friends;
+
     if (friends.contains(friend)) {
       return friend;
-    } else
-      Exception('${friend.login} is not a friend of the login');
+    } else {
+      throw Exception('${friend.login} is not a friend of the login');
+    }
+  }
+
+  List<User> importUsers(List<String> userList) {
+    List<User> users = [];
+    for (String userString in userList) {
+      userString = userString.replaceAll("\n", " ");
+
+      List<String> userParams = userString.split(';');
+
+      for (var i = 0; i < userParams.length; i++) {
+        userParams[i] = userParams[i].trim();
+      }
+
+      User user =
+          User(name: userParams[0], email: userParams[1], phone: userParams[2]);
+      users.add(user);
+    }
+
+    return users;
   }
 }
