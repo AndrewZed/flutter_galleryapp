@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_galleryapp/screens/foto_screen.dart';
 import 'package:flutter_galleryapp/widgets/widgets.dart';
 import 'package:flutter_galleryapp/res/res.dart';
 
 const String kFlutterDash =
-    'https://storage.googleapis.com/cms-storage-bucket/65361d7e1dfa118aa63b.png';
+    'https://sun6-23.userapi.com/s/v1/if1/cI7V1bg7gn73P2yHNuMvy9GXXBYGwg_ctn_XC1BfiUIUqorNF7n0J0Qn0pV0yKg8Plzgelh5.jpg?size=1199x1200&quality=96&crop=359,0,1199,1200&ava=1';
+const String userFoto =
+    'https://e7.pngegg.com/pngimages/595/79/png-clipart-dart-programming-language-flutter-object-oriented-programming-flutter-logo-class-fauna.png';
 
 class Feed extends StatefulWidget {
   Feed({Key? key}) : super(key: key);
@@ -31,12 +34,24 @@ class _FeedState extends State<Feed> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Photo(photoLink: kFlutterDash),
+        GestureDetector(
+            child: Photo(photoLink: kFlutterDash),
+            onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => FullScreenImage(
+                          foto: kFlutterDash,
+                          name: 'Andrey Bolshakov',
+                          nickName: '@AndrewZed',
+                          userFoto: userFoto,
+                          altDescription:
+                              'Beautiful girl in a yellow dress with a flower on her head in the summer in the forest')),
+                )),
         _buildPhotoMeta(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Text(
-            'This is Flutter dash. I love him.',
+            'Beautiful girl in a yellow dress with a flower on her head in the summer in the forest',
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
             style: AppStyles.h3.copyWith(color: AppColors.black),
@@ -57,9 +72,7 @@ class _FeedState extends State<Feed> {
         children: <Widget>[
           Row(
             children: <Widget>[
-              const UserAvatar(
-                  avatarLink:
-                      'https://e7.pngegg.com/pngimages/595/79/png-clipart-dart-programming-language-flutter-object-oriented-programming-flutter-logo-class-fauna.png'),
+              const UserAvatar(avatarLink: userFoto),
               const SizedBox(width: 6),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,7 +86,7 @@ class _FeedState extends State<Feed> {
               )
             ],
           ),
-          LikeButton(10, true),
+          LikeButton(2345, true),
         ],
       ),
     );

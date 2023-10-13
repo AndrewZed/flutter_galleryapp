@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter demo',
-      theme: ThemeData(primaryColor: Colors.blue),
+      //home: FullScreenImage(),
       home: Feed(),
     );
   }
